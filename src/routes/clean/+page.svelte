@@ -58,34 +58,32 @@
 
 {#if !data.user}
     <Login />
-{/if}
+{:else}
+    <input autofocus type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
 
+    {#if querying}
+        {#each tabs as tab}
+            <Tab bind:tab />
+        {/each}
+    {/if}
 
-<input autofocus type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
-
-{#if querying}
-    {#each tabs as tab}
-        <Tab bind:tab />
-    {/each}
-{/if}
-
-{#if !querying}
-    <div class="answer_and_ref_cards_container">
-        <div class="answer_container">
-            {#each $messages.slice().reverse().filter(m => m.role === 'assistant') as message}
-                <div class="message" on:click={handleMessageClick}>
-                    {@html markdownToHtml(message.content)}
-                </div>
-            {/each}
+    {#if !querying}
+        <div class="answer_and_ref_cards_container">
+            <div class="answer_container">
+                {#each $messages.slice().reverse().filter(m => m.role === 'assistant') as message}
+                    <div class="message" on:click={handleMessageClick}>
+                        {@html markdownToHtml(message.content)}
+                    </div>
+                {/each}
+            </div>
+            <div class="ref_cards_right_sidebar" >
+                {#each tabs as tab}
+                    <RefCard bind:tab />
+                {/each}
+            </div>
         </div>
-        <div class="ref_cards_right_sidebar" >
-            {#each tabs as tab}
-                <RefCard bind:tab />
-            {/each}
-        </div>
-    </div>
+    {/if}
 {/if}
-
 
 
 <style>
