@@ -9,7 +9,7 @@
 
     let query_prefix = "";
     let querying = true;
-    let data = {};
+    export let data = {};
     let dummy_tab_data = [
         [1, "https://facebook.com", "Facebook"],
         [2, "https://instagram.com", "Instagram"]
@@ -53,6 +53,39 @@
     }
 </script>
 
+
+{#if !data.user}
+    <Login />
+{/if}
+
+
+<input type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
+
+{#if querying}
+    {#each tabs as tab}
+        <Tab bind:tab />
+    {/each}
+{/if}
+
+{#if !querying}
+    <div class="answer_and_ref_cards_container">
+        <div class="answer_container">
+            {#each $messages.slice().reverse().filter(m => m.role === 'assistant') as message}
+                <div class="message" on:click={handleMessageClick}>
+                    {@html message.content}
+                </div>
+            {/each}
+        </div>
+        <div class="ref_cards_right_sidebar" >
+            {#each tabs as tab}
+                <RefCard bind:tab />
+            {/each}
+        </div>
+    </div>
+{/if}
+
+
+
 <style>
     input[type="text"] {
         width: 100%; /* Full width */
@@ -93,33 +126,3 @@
         color: red;
     }
 </style>
-
-{#if data.user}
-    <Login />
-{/if}
-
-
-<input type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
-
-{#if querying}
-    {#each tabs as tab}
-        <Tab bind:tab />
-    {/each}
-{/if}
-
-{#if !querying}
-    <div class="answer_and_ref_cards_container">
-        <div class="answer_container">
-            {#each $messages.slice().reverse().filter(m => m.role === 'assistant') as message}
-                <div class="message" on:click={handleMessageClick}>
-                    {@html message.content}
-                </div>
-            {/each}
-        </div>
-        <div class="ref_cards_right_sidebar" >
-            {#each tabs as tab}
-                <RefCard bind:tab />
-            {/each}
-        </div>
-    </div>
-{/if}
