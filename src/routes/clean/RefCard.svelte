@@ -2,7 +2,9 @@
     import {slide} from 'svelte/transition';
     export let tab = {};
     // const imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
-    $: imageUrl = tab.opengraph && tab.opengraph[0] && tab.opengraph[0]['og:image']
+    $: imageUrl = tab?.opengraph?.[0]?.['og:image'];
+    $: bestTitle = tab?.opengraph?.[0]?.['og:title'] || tab?.title || tab?.url;
+
 
     function jump() {
         console.log('jumping to', tab.url);
@@ -12,7 +14,7 @@
 
 <div class="card" on:click={jump} in:slide={{ duration: 400 }}>
     <div class="content">
-        <a class="link" href={tab[1]} target="_blank" rel="noopener noreferrer">{tab.url}</a>
+        <a class="link" href={tab.url} target="_blank" rel="noopener noreferrer">{bestTitle}</a>
         <img src={imageUrl} alt="Description of Image">
     </div>
     <div class="description">{tab.text}</div>

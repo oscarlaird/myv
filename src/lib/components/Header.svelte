@@ -30,6 +30,7 @@
     </svg> -->
   </nav>
 
+
   <div class="corner">
     <a href="https://github.com/soccerbob97/LLMTabManager">
       <img src={github} alt="GitHub" />

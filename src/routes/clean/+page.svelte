@@ -109,7 +109,7 @@
         flex-direction: row;
     }
     .answer_container {
-        flex: 1;
+        flex: 1.5;
     }
     .ref_cards_right_sidebar {
         flex: 1;
