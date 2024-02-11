@@ -126,7 +126,7 @@
     }
     .message {
         padding: 10px;
-        margin: 10px;
+        margin: 8px 10px 6px 0;
         border-radius: 10px;
         background-color: #f0f0f0;
     }
