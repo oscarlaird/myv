@@ -2,6 +2,7 @@
     import { useChat } from 'ai/svelte';
     import Tab from "./Tab.svelte";
     import RefCard from "./RefCard.svelte";
+    import { onMount } from 'svelte';
     
     const { messages, append } = useChat();
 
@@ -13,13 +14,17 @@
         [2, "https://instagram.com", "Instagram"]
     ];
     let tabs = [...dummy_tab_data];
+    let backend_url = "http://northcarolina-b.tensordockmarketplace.com:22007";
+
 
     async function searchTabs() {
         if (query_prefix.length < 1) {
             return;
         }
-        let data = await fetch(`http://127.0.0.1:8000/query_similar_tabs?k=5&query_prefix=${query_prefix}`);
-        let json = await data.json();
+        // querying = true;
+        let response = await fetch(`/api/db?k=5&query_prefix=${query_prefix}&user=${data.user}`);
+        let json = await response.json();
+        console.log(json);
         tabs = json;
     }
 
