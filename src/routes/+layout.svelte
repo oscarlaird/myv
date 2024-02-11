@@ -14,11 +14,11 @@
 
 <style>
   .container {
-    margin: 10vh auto;
+    margin: 15vh auto;
     max-width: 800px;
     height: 80vh;
     width: 100vw;
-    padding: 0 40px;
+    padding: 0px 40px;
     background-color: rgba(212, 138, 53, 0.884);
     box-shadow: 0 0 35px 65px rgba(212, 138, 53, 0.884);
   }

@@ -26,6 +26,7 @@
 
     async function ask_gpt() {
         querying = false;
+        let context_tabs = tabs.map(tab => ({url: tab.url, context: tab.text}));
         let query = `
         Answer my question based on context: ${query_prefix}.
         Use the provided excerpts to answer the question. Provide your answer as html.
@@ -33,9 +34,10 @@
         The syntax []() is not allowed. The syntax <a href="SRC_URL">TEXT</a> is required.
         Be very concise and provide links as often as possible.
         CONTEXT
-        ${JSON.stringify(tabs)}
+        ${JSON.stringify(context_tabs)}
         ANSWER
         `;
+        console.log('asking gpt', query);
         append({
             content: query,
             role: 'user'
