@@ -10,11 +10,7 @@
     let query_prefix = "";
     let querying = true;
     export let data = {};
-    let dummy_tab_data = [
-        [1, "https://facebook.com", "Facebook"],
-        [2, "https://instagram.com", "Instagram"]
-    ];
-    let tabs = [...dummy_tab_data];
+    let tabs = [];
 
 
     async function searchTabs() {
