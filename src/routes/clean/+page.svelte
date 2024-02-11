@@ -15,6 +15,7 @@
         [2, "https://instagram.com", "Instagram"]
     ]
     let tabs = [...dummy_tab_data];
+    let backend_url = "http://northcarolina-b.tensordockmarketplace.com:22007";
 
     async function searchTabs() {
         console.log('searching tabs');
@@ -22,7 +23,7 @@
             return;
         }
         // querying = true;
-        let response = await fetch(`http://127.0.0.1:8000/query_similar_tabs?k=5&query_prefix=${query_prefix}&user=${data.user}`);
+        let response = await fetch(`${backend_url}/query_similar_tabs?k=5&query_prefix=${query_prefix}&user=${data.user}`);
         let json = await response.json();
         console.log(json);
         tabs = json;
