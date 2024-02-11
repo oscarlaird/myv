@@ -29,5 +29,6 @@
     font-size: 3em;
     font-family: 'Dancing Script', cursive;
     text-align: center;
+    font-style: italic;
   }
 </style>
