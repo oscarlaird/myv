@@ -23,10 +23,10 @@
     box-shadow: 0 0 35px 65px rgba(212, 138, 53, 0.884);
   }
   .title_container {
-    transform: translateY(100%);
+    transform: translateY(80%);
   }
   .title_container h1 {
-    font-size: 1.6em;
+    font-size: 3em;
     font-family: 'Dancing Script', cursive;
     text-align: center;
   }
