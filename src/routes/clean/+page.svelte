@@ -61,7 +61,7 @@
 {/if}
 
 
-<input type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
+<input autofocus type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
 
 {#if querying}
     {#each tabs as tab}
