@@ -22,7 +22,7 @@
             return;
         }
         // querying = true;
-        let response = await fetch(`/api/db?k=5&query_prefix=${query_prefix}&user=${data.user}`);
+        let response = await fetch(`/api/db?k=10&query_prefix=${query_prefix}&user=${data.user}`);
         let json = await response.json();
         console.log(json);
         tabs = json;
