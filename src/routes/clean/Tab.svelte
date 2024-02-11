@@ -61,7 +61,7 @@
 
 <div class="card" on:click={jump}>
     <div class="content">
-        <a class="link" target="_blank" rel="noopener noreferrer">{bestTitle}</a>
+        {bestTitle}
         <img src={imageUrl} alt="Description of Image">
     </div>
     <div class="description">{tab.text}</div>

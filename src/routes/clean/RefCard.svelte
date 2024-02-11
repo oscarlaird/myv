@@ -14,7 +14,7 @@
 
 <div class="card" on:click={jump} in:slide={{ duration: 400 }}>
     <div class="content">
-        <a class="link" href={tab.url} target="_blank" rel="noopener noreferrer">{bestTitle}</a>
+        {bestTitle}
         <img src={imageUrl} alt="Description of Image">
     </div>
     <div class="description">{tab.text}</div>
