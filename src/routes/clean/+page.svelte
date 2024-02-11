@@ -3,12 +3,13 @@
     import Tab from "./Tab.svelte";
     import RefCard from "./RefCard.svelte";
     import { onMount } from 'svelte';
+    import Login from './Login.svelte';
     
     const { messages, append } = useChat();
 
     let query_prefix = "";
     let querying = true;
-
+    let data = {};
     let dummy_tab_data = [
         [1, "https://facebook.com", "Facebook"],
         [2, "https://instagram.com", "Instagram"]
@@ -92,6 +93,11 @@
         color: red;
     }
 </style>
+
+{#if data.user}
+    <Login />
+{/if}
+
 
 <input type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
 
