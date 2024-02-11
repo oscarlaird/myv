@@ -1,20 +1,21 @@
 <script>
     import {slide} from 'svelte/transition';
-    export let tab = [0, "", ""];
-    const imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
+    export let tab = {};
+    // const imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
+    $: imageUrl = tab.opengraph && tab.opengraph[0] && tab.opengraph[0]['og:image']
 
     function jump() {
-        console.log('jumping to', tab[1]);
-        window.parent.postMessage({type: 'jump', url: tab[1]}, '*'); // '*' means any origin
+        console.log('jumping to', tab.url);
+        window.parent.postMessage({type: 'jump', url: tab.url}, '*'); // '*' means any origin
     }
 </script>
 
 <div class="card" on:click={jump} in:slide={{ duration: 400 }}>
     <div class="content">
-        <a class="link" href={tab[1]} target="_blank" rel="noopener noreferrer">{tab[2]}</a>
+        <a class="link" href={tab[1]} target="_blank" rel="noopener noreferrer">{tab.url}</a>
         <img src={imageUrl} alt="Description of Image">
     </div>
-    <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </div>
+    <div class="description">{tab.text}</div>
 </div>
 
 

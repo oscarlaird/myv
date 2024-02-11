@@ -1,11 +1,17 @@
 <script>
-    export let tab = [0, "", "", ""]; // Assuming the fourth element is the description
+    import { onMount } from "svelte";
+    export let tab = {}; // Assuming the fourth element is the description
     // Placeholder image URL - replace with your actual image URL
-    const imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
-   
+    // const imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
+    // $: imageUrl = JSON.parse(tab[3])['og:image'];
+    // try to parse JSON otherwise use default image
+
+    // let imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
+    $: imageUrl = tab.opengraph && tab.opengraph[0] && tab.opengraph[0]['og:image']
+
     function jump() {
-        console.log('Jumping to', tab[1]);
-        window.parent.postMessage({type: 'jump', url: tab[1]}, '*');
+        console.log('Jumping to', tab.url);
+        window.parent.postMessage({type: 'jump', url: tab.url}, '*');
     }
 </script>
 
@@ -54,8 +60,9 @@
 
 <div class="card" on:click={jump}>
     <div class="content">
-        <a class="link" target="_blank" rel="noopener noreferrer">{tab[2]}</a>
+        <a class="link" target="_blank" rel="noopener noreferrer">{tab.url}</a>
+        {imageUrl}
         <img src={imageUrl} alt="Description of Image">
     </div>
-    <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </div>
+    <div class="description">{tab.text}</div>
 </div>
