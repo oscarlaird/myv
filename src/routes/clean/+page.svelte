@@ -34,7 +34,7 @@
         Answer my question based on context: ${query_prefix}.
         Use the provided excerpts to answer the question. Provide your answer as html.
         You must use the <a> tag, with the href attribute set to the URL of the source.
-        MARKDOWN IS BAD. HTML IS GOOD.
+        The syntax []() is not allowed. The syntax <a href="SRC_URL">TEXT</a> is required.
         Be very concise and provide links as often as possible.
         CONTEXT
         ${JSON.stringify(tabs)}
@@ -52,6 +52,11 @@
             window.parent.postMessage({type: 'jump', url: event.target.href}, '*');
         }
     }
+
+    function markdownToHtml(input) {
+        return input.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
+    }
+
 </script>
 
 
@@ -73,7 +78,7 @@
         <div class="answer_container">
             {#each $messages.slice().reverse().filter(m => m.role === 'assistant') as message}
                 <div class="message" on:click={handleMessageClick}>
-                    {@html message.content}
+                    {@html markdownToHtml(message.content)}
                 </div>
             {/each}
         </div>
