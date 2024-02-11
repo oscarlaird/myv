@@ -70,8 +70,8 @@
         align-items: flex-start; /* Align items to the start of the flex container */
         border: 1px solid #ccc;
         border-radius: 8px;
-        padding: 16px;
-        margin: 8px;
+        padding: 6px;
+        margin: 8px 0 6px 0; /* Spacing between cards */
         transition: box-shadow 0.3s ease;
         background-color: #f0f0f0;
     }
