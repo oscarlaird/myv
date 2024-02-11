@@ -19,12 +19,13 @@
 <style>
     .card {
         display: flex;
-        flex-direction: column; /* Changed to stack items vertically */
-        align-items: flex-start; /* Align items to the start of the flex container */
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         border: 1px solid #ccc;
         border-radius: 8px;
-        padding: 16px;
-        margin: 8px;
+        padding: 6px;
+        margin: 0 0 8px 0; /* Spacing between cards */
         transition: box-shadow 0.3s ease;
         background-color: #f0f0f0;
     }
@@ -41,18 +42,15 @@
     }
 
     .content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%; /* Ensure content fills the card width */
     }
 
     .description {
-        margin-top: 8px; /* Spacing between the content and description */
+        margin-top: 4px; /* Spacing between the content and description */
+        font-size: small;
+        color: #505050;
     }
 
     .card img {
-        margin-left: 16px; /* Spacing between text and image */
         width: 100px; /* Example width, adjust as needed */
         height: auto; /* Maintain aspect ratio */
         border-radius: 4px; /* Optional: rounds the corners of the image */
@@ -61,8 +59,10 @@
 
 <div class="card" on:click={jump}>
     <div class="content">
-        {bestTitle}
-        <img src={imageUrl} alt="Description of Image">
+        <div class="title_text"> {bestTitle} </div>
+        <div class="description">{tab.text}</div>
     </div>
-    <div class="description">{tab.text}</div>
+    {#if imageUrl}
+        <img src={imageUrl} >
+    {/if}
 </div>

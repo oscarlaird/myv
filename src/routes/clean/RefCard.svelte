@@ -15,7 +15,9 @@
 <div class="card" on:click={jump} in:slide={{ duration: 400 }}>
     <div class="content">
         {bestTitle}
-        <img src={imageUrl} alt="Description of Image">
+        {#if imageUrl}
+            <img src={imageUrl} >
+        {/if}
     </div>
     <div class="description">{tab.text}</div>
 </div>
@@ -51,7 +53,9 @@
     }
 
     .description {
-        margin-top: 8px; /* Spacing between the content and description */
+        margin-top: 4px; /* Spacing between the content and description */
+        font-size: small;
+        color: #505050;
     }
 
     .card img {

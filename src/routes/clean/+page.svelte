@@ -34,6 +34,7 @@
         Answer my question based on context: ${query_prefix}.
         Use the provided excerpts to answer the question. Provide your answer as html.
         You must use the <a> tag, with the href attribute set to the URL of the source.
+        MARKDOWN IS BAD. HTML IS GOOD.
         Be very concise and provide links as often as possible.
         CONTEXT
         ${JSON.stringify(tabs)}
