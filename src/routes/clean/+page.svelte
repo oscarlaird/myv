@@ -53,13 +53,19 @@
         return input.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
     }
 
+    function handleBarKeyPress(event) {
+        if (event.key === 'Enter') {
+            ask_gpt();
+        }
+    }
+
 </script>
 
 
 {#if !data.user}
     <Login />
 {:else}
-    <input autofocus type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
+    <input autofocus type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:keypress={handleBarKeyPress} />
 
     {#if querying}
         {#each tabs as tab}
