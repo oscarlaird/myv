@@ -21,7 +21,6 @@
     padding: 0 40px;
     background-color: rgba(212, 138, 53, 0.884);
     box-shadow: 0 0 35px 65px rgba(212, 138, 53, 0.884);
-    overflow: hidden;
   }
   .title_container {
     transform: translateY(100%);

@@ -26,15 +26,15 @@
         border-radius: 8px;
         padding: 6px;
         margin: 0 0 8px 0; /* Spacing between cards */
-        transition: box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         background-color: #f0f0f0;
     }
-    
-    .card:hover {
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        cursor: pointer;
-    }
 
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
     .link {
         text-decoration: none;
         color: #505050;

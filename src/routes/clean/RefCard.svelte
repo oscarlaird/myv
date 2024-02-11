@@ -74,10 +74,12 @@
         margin: 8px 0 6px 0; /* Spacing between cards */
         transition: box-shadow 0.3s ease;
         background-color: #f0f0f0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        cursor: pointer;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+    
 </style>

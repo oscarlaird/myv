@@ -23,6 +23,7 @@ body {
   background-color: rgba(0, 0, 0, 0);
   background-color: rgba(212, 137, 51, 0.611);
   background-size: 100vw 100vh;
+  overflow: hidden;
 }
 
 h1,
