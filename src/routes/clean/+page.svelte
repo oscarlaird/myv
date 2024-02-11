@@ -1,36 +1,31 @@
 <script>
     import { useChat } from 'ai/svelte';
     import Tab from "./Tab.svelte";
-    import Login from "./Login.svelte";
     import RefCard from "./RefCard.svelte";
     
     const { messages, append } = useChat();
 
     let query_prefix = "";
     let querying = true;
-    export let data = {};
 
     let dummy_tab_data = [
         [1, "https://facebook.com", "Facebook"],
         [2, "https://instagram.com", "Instagram"]
-    ]
+    ];
     let tabs = [...dummy_tab_data];
 
     async function searchTabs() {
-        console.log('searching tabs');
         if (query_prefix.length < 1) {
             return;
         }
-        // querying = true;
-        let response = await fetch(`http://127.0.0.1:8000/query_similar_tabs?k=5&query_prefix=${query_prefix}&user=${data.user}`);
-        let json = await response.json();
-        console.log(json);
+        let data = await fetch(`http://127.0.0.1:8000/query_similar_tabs?k=5&query_prefix=${query_prefix}`);
+        let json = await data.json();
         tabs = json;
     }
 
     async function ask_gpt() {
-       querying = false;
-       let query = `
+        querying = false;
+        let query = `
         Answer my question based on context: ${query_prefix}.
         Use the provided excerpts to answer the question. Provide your answer as html.
         You must use the <a> tag, with the href attribute set to the URL of the source.
@@ -39,33 +34,62 @@
         ${JSON.stringify(tabs)}
         ANSWER
         `;
-       console.log('asking gpt'); 
-       append({
-           content: query,
-           role: 'user'
-       });
+        append({
+            content: query,
+            role: 'user'
+        });
     }
 
     function handleMessageClick(event) {
         event.preventDefault();
-        // if they clicked a link
         if (event.target.tagName === 'A') {
-            // open the link in a new tab
-            // window.open(event.target.href, '_blank');
-            window.parent.postMessage({type: 'jump', url: event.target.href}, '*'); // '*' means any origin
+            window.parent.postMessage({type: 'jump', url: event.target.href}, '*');
         }
     }
-
-
 </script>
 
+<style>
+    input[type="text"] {
+        width: 100%; /* Full width */
+        padding: 12px 20px; /* Padding for comfort */
+        margin: 8px 0; /* Spacing around the input */
+        display: inline-block; /* Align properly with other inline elements */
+        border: 1px solid #ccc; /* Subtle border */
+        border-radius: 4px; /* Rounded corners */
+        box-sizing: border-box; /* Box sizing to include padding in width */
+        transition: border-color 0.3s ease-in-out; /* Smooth transition for focus */
+    }
 
+    input[type="text"]:focus {
+        border-color: #ffffff; /* Highlight color when focused */
+        outline: none; /* Remove default focus outline */
+    }
 
-{#if !data.user}
-    <Login />
-{/if}
+    /* Existing styles */
+    .answer_and_ref_cards_container {
+        display: flex;
+        flex-direction: row;
+    }
+    .answer_container {
+        flex: 1;
+    }
+    .ref_cards_right_sidebar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .message {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+    }
+    .message a {
+        color: red;
+    }
+</style>
 
-<input type="text" placeholder="search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
+<input type="text" placeholder="Search your tabs..." bind:value={query_prefix} on:input={searchTabs} on:change={ask_gpt} />
 
 {#if querying}
     {#each tabs as tab}
@@ -89,27 +113,3 @@
         </div>
     </div>
 {/if}
-
-<style>
-    .answer_and_ref_cards_container {
-        display: flex;
-        flex-direction: row;
-    }
-    .answer_container {
-        flex: 1;
-    }
-    .ref_cards_right_sidebar {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-    .message {
-        padding: 10px;
-        margin: 10px;
-        border-radius: 10px;
-        background-color: #f0f0f0;
-    }
-    .message a {
-        color: red;
-    }
-</style>

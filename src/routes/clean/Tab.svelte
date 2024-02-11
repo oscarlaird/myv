@@ -2,7 +2,7 @@
     export let tab = [0, "", "", ""]; // Assuming the fourth element is the description
     // Placeholder image URL - replace with your actual image URL
     const imageUrl = "https://www.fauna-flora.org/wp-content/uploads/2017/01/AdobeStock_127901077.jpeg";
-
+   
     function jump() {
         console.log('Jumping to', tab[1]);
         window.parent.postMessage({type: 'jump', url: tab[1]}, '*');
@@ -19,6 +19,7 @@
         padding: 16px;
         margin: 8px;
         transition: box-shadow 0.3s ease;
+        background-color: #f0f0f0;
     }
     
     .card:hover {
@@ -53,7 +54,7 @@
 
 <div class="card" on:click={jump}>
     <div class="content">
-        <a class="link" href={tab[1]} target="_blank" rel="noopener noreferrer">{tab[2]}</a>
+        <a class="link" target="_blank" rel="noopener noreferrer">{tab[2]}</a>
         <img src={imageUrl} alt="Description of Image">
     </div>
     <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </div>

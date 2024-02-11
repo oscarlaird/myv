@@ -66,6 +66,7 @@
         padding: 16px;
         margin: 8px;
         transition: box-shadow 0.3s ease;
+        background-color: #f0f0f0;
     }
 
     .card:hover {
