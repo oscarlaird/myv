@@ -7,6 +7,7 @@
         <label>
             What is your username?:
             <input
+                autofocus
                 name="user"
                 autocomplete="off"
                 required
