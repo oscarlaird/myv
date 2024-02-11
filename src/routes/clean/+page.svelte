@@ -18,11 +18,6 @@
     let tabs = [...dummy_tab_data];
     let backend_url = "http://northcarolina-b.tensordockmarketplace.com:22007";
 
-    onMount( async () => {
-        const response = await fetch('/api/db');
-        let number = await response.json();
-        console.log(number);
-    });
 
     async function searchTabs() {
         console.log('searching tabs');
