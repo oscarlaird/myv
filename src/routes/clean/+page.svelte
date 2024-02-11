@@ -14,7 +14,6 @@
         [2, "https://instagram.com", "Instagram"]
     ];
     let tabs = [...dummy_tab_data];
-    let backend_url = "http://northcarolina-b.tensordockmarketplace.com:22007";
 
 
     async function searchTabs() {
